@@ -1,0 +1,70 @@
+﻿body
+{
+    font-family: 'Titillium Web', sans-serif;
+
+    color: hsl(0, 0%, 50%);
+    background: rgba(0, 0, 0, 0.05);
+
+    margin: 20pt 50pt;
+}
+
+header
+{
+    font-size: 48pt;
+    margin-bottom: 20pt;
+}
+
+.group
+{
+    font-size: 24pt;
+
+    width: 100%;
+
+    position: relative;
+    padding: 0;
+    float: left;
+}
+
+.group > h1
+{
+    font-weight: normal;
+    overflow: hidden;
+}
+
+.item
+{
+    background: rgba(0, 0, 0, 0.05);
+
+    width: 300px;
+    height: 64px;
+
+    position: relative;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    float: left;
+
+    overflow: hidden;
+}
+
+.item:hover
+{
+    background: hsl(150, 100%, 60%);
+}
+.item:active
+{
+    background: hsl(150, 100%, 40%);
+}
+
+.item > a
+{
+    color: hsl(0, 0%, 40%);
+    font-size: 20pt;
+    text-decoration: none;
+
+    width: 100%;
+    height: 100%;
+    line-height: 64px;
+
+    position: absolute;
+    padding-left: 10px;
+}
