@@ -5,12 +5,12 @@
     color: hsl(0, 0%, 50%);
     background: rgba(0, 0, 0, 0.05);
 
-    margin: 20px 50px;
+    margin: 20px 100px;
 }
 
 header
 {
-    font-size: 64px;
+    font-size: 4rem;
     margin-bottom: 20px;
 }
 
@@ -25,7 +25,7 @@ header
 
 .group > h1
 {
-    font-size: 48px;
+    font-size: 3rem;
 
     font-weight: normal;
     margin-bottom: 10px;
@@ -37,12 +37,10 @@ header
     background: rgba(0, 0, 0, 0.03);
 
     width: 100%;
-    height: 64px;
+    height: 4rem;
 
     position: relative;
-    margin-right: 10px;
-    margin-bottom: 10px;
-    float: left;
+    margin-bottom: 1rem;
 
     overflow: hidden;
 }
@@ -59,21 +57,13 @@ header
 .item > a
 {
     color: hsl(0, 0%, 40%);
-    font-size: 24px;
+    font-size: 2rem;
     text-decoration: none;
 
     width: 100%;
     height: 100%;
-    line-height: 64px;
+    line-height: 4rem;
 
     position: absolute;
-    padding-left: 10px;
-}
-
-@media screen and (max-width: 480px)
-{
-    body
-    {
-        margin: 5px;
-    }
+    padding: 0 1rem;
 }
