@@ -1,0 +1,42 @@
+<html lang="ja">
+<head>
+    <meta charset="utf-8" />
+    <title>Preview formulas</title>
+    <link href="https://fonts.googleapis.com/css?family=Titillium+Web" rel="stylesheet" />
+    <link href="../index.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&locale=ja"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.5.1.min.js"></script>
+    <script type="text/javascript" src="preview.js"></script>
+    <script type="text/x-mathjax-config" src="mathjax.config"></script>
+    <style>
+        #input
+        {
+            width: 100%;
+        }
+        #preview
+        {
+            color: black;
+        }
+    </style>
+</head>
+
+<body>
+    <header>Preview formulas</header>
+
+    <main>
+        <article>
+            <h1>Input</h1>
+            <p>
+                <textarea id="input" name="body" cols="70" rows="10">
+\begin{equation}
+  \sin x
+\end{equation}
+</textarea>
+            </p>
+            <h1>Preview</h1>
+            <div id="preview"></div>
+        </article>
+    </main>
+
+</body>
+</html>
