@@ -35,16 +35,22 @@ function draw()
 {
     // set smoothing rate according to the slide bar
     a = slider.value();
+}
 
+function touchStarted()
+{
+    // initialize control points
+    p1 = p2 = p3 = p4 = {x: mouseX, y: mouseY};
+}
+
+function touchMoved()
+{
     // update positions of control points
     p4 = p3;
     p3 = p2;
     p2 = p1;
     p1 = {x: (1-a)*p1.x + a*mouseX, y: (1-a)*p1.y + a*mouseY};
 
-    // draw a curve when mouse is pressed
-    if (mouseIsPressed)
-    {
-        curve(p4.x, p4.y, p3.x, p3.y, p2.x, p2.y, p1.x, p1.y);
-    }
+    // draw a curve
+    curve(p4.x, p4.y, p3.x, p3.y, p2.x, p2.y, p1.x, p1.y);
 }
