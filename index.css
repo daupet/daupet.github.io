@@ -5,7 +5,8 @@
     color: hsl(0, 0%, 50%);
     background: rgba(0, 0, 0, 0.05);
 
-    margin: 20px 50px;
+    margin: 0;
+    padding: 20px 50px;
 }
 
 header
