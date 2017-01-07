@@ -5,23 +5,26 @@ var slider;
 function setup()
 {
     // create canvas
-    var elem_canvas = document.getElementById("p5_canvas");
-    canvas = createCanvas(elem_canvas.offsetWidth, elem_canvas.offsetHeight - 100);
-    canvas.parent("p5_canvas");
+    canvas = createCanvas(640, 480);
+    canvas.parent("canvas_container");
+    canvas.style("display",          "block")
+    canvas.style("background-color", "white")
+    canvas.style("margin-bottom",    "10px")
+
+    // create slide bar to set smoothing rate
+    slider = createSlider(0, 1, 1, 0.01);
+    slider.parent("canvas_container");
+    slider.style('width',        canvas.width - 90 + "px");
+    slider.style('height',       "30px");
+    slider.style('float',        "left");
+    slider.style('margin-right', "20px");
 
     // create reset button
     button_reset = createButton("reset");
-    button_reset.parent("p5_canvas");
-    button_reset.position(elem_canvas.offsetWidth - 50, elem_canvas.offsetHeight - 50);
+    button_reset.parent("canvas_container");
+    button_reset.style('width',  "60px");
+    button_reset.style('height', "30px");
     button_reset.mousePressed(function() { clear(); });
-
-    // create slide bar to set smoothing rate
-    slider = createSlider(0, 1, 1, 0);
-    slider.parent("p5_canvas");
-    slider.position(0, elem_canvas.offsetHeight - 45);
-    slider.style('width', elem_canvas.offsetWidth - 90 + "px");
-
-    textbox = 0;
 
     // settings for drawing curves
     noFill();
