@@ -25,6 +25,10 @@ function setup()
     p.y = l*cos(state[0]);
     p.add(p0);
     g = createVector(0, 0);
+    window.addEventListener("devicemotion", function(e) {
+            g.x = e.accelerationIncludingGravity.x;
+            g.y = e.accelerationIncludingGravity.y;
+        }, false);
 }
 
 
@@ -35,8 +39,10 @@ function draw()
     if (isFinite(N) == false) N = 0;
 
     // update gravity
+    /*
     g.x = accelerationX*ppm*ppm;
     g.y = accelerationY*ppm*ppm;
+    */
 
     // calculating time evolution N times
     for (var i=0; i<N; i++)
