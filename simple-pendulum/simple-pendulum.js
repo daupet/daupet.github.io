@@ -2,7 +2,7 @@ var canvas;
 
 var ppm = 10; // pixel per meter
 var dT = 0.001; // sampling interval [sec]
-var g = 9.8*ppm*ppm; // gravity [px/sec/sec]
+var g; // gravity vector [px/sec/sec]
 var l = 100; // length of pendulum
 
 var p0; // position of origin
@@ -24,6 +24,7 @@ function setup()
     p.x = l*sin(state[0]);
     p.y = l*cos(state[0]);
     p.add(p0);
+    g = createVector(0, 0);
 }
 
 
@@ -32,6 +33,10 @@ function draw()
     // the number of time evolution at this frame
     N = int(1/frameRate() / dT);
     if (isFinite(N) == false) N = 0;
+
+    // update gravity
+    g.x = accelerationX*ppm*ppm;
+    g.y = accelerationY*ppm*ppm;
 
     // calculating time evolution N times
     for (var i=0; i<N; i++)
@@ -99,7 +104,9 @@ function F(x, dt)
     theta = x[0];
     omega = x[1];
 
-    var accel = (-g*sin(theta)) / l;
+    var g_th = g.x*cos(theta) - g.y*sin(theta)
+
+    var accel = (g_th) / l;
 
     return [omega, accel];
 }
