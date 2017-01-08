@@ -48,19 +48,37 @@ function draw()
 
 function touchStarted()
 {
-    if (touches.length == 0) return;
+    // get position of mouse or touch
+    if (touches.length > 0)
+    {
+        p = {x: touches[0].x, y: touches[0].y};
+    }
+    else
+    {
+        p = {x: mouseX, y: mouseY};
+    }
 
     // initialize control points
-    p1 = p2 = p3 = p4 = {x: touches[0].x, y: touches[0].y};
+    p1 = p2 = p3 = p4 = p;
 }
 
 function touchMoved()
 {
+    // get position of mouse or touch
+    if (touches.length > 0)
+    {
+        p = {x: touches[0].x, y: touches[0].y};
+    }
+    else
+    {
+        p = {x: mouseX, y: mouseY};
+    }
+
     // update positions of control points
     p4 = p3;
     p3 = p2;
     p2 = p1;
-    p1 = {x: (1-a)*p1.x + a*touches[0].x, y: (1-a)*p1.y + a*touches[0].y};
+    p1 = {x: (1-a)*p1.x + a*p.x, y: (1-a)*p1.y + a*p.y};
 
     // draw a curve
     curve(p4.x, p4.y, p3.x, p3.y, p2.x, p2.y, p1.x, p1.y);
