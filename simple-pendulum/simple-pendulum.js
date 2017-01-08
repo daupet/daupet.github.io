@@ -20,7 +20,7 @@ function setup()
     // initialize variables
     p0 = createVector(width/2, height/2);
     p  = createVector(0, 0);
-    state = [1.57079632679489661923, 0.0];
+    state = [0.0, 0.0];
     p.x = l*sin(state[0]);
     p.y = l*cos(state[0]);
     p.add(p0);
