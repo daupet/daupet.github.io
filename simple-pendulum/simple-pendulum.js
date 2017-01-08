@@ -26,7 +26,7 @@ function setup()
     p.add(p0);
     g = createVector(0, 0);
     window.addEventListener("devicemotion", function(e) {
-            g.x = e.accelerationIncludingGravity.x;
+            g.x = -e.accelerationIncludingGravity.x;
             g.y = e.accelerationIncludingGravity.y;
         }, false);
 }
