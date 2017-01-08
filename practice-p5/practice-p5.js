@@ -6,10 +6,16 @@ function setup()
 {
     // create canvas
     canvas = createCanvas(640, 480);
+    canvas.id("p5_canvas");
     canvas.parent("canvas_container");
     canvas.style("display",          "block")
     canvas.style("background-color", "white")
     canvas.style("margin-bottom",    "10px")
+
+    // disable scrolling while the canvas is being touched
+    elem_canvas = document.getElementById("p5_canvas");
+    elem_canvas.addEventListener("touchstart", function(e){ e.preventDefault(); }, false);
+    elem_canvas.addEventListener("touchmove", function(e){ e.preventDefault(); }, false);
 
     // create slide bar to set smoothing rate
     slider = createSlider(0, 1, 1, 0.01);
