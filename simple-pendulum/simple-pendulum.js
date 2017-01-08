@@ -57,6 +57,8 @@ function draw()
 
     // drawing
     clear();
+    noStroke();
+    text("gx: " + g.x + "\n" + "gy: " + g.y, 10, 10);
     stroke(0, 0, 0);
     fill(0, 0, 0);
     line(p0.x, p0.y, p.x, p.y);
