@@ -4,14 +4,10 @@ var ppm = 10; // the number of pixels per meter
 var dT = 0.001; // sampling interval [sec]
 var g = 9.8*ppm*ppm; // gravity [px/sec/sec]
 var l = 100; // length of pendulum
-var p0; // origin
-var p; // position and velocity of mass
 
-var th;
-var oo;
-var poo;
-var pacc;
-var state;
+var p0; // position of origin
+var p; // [x, y]: position in Cartesian coordinate system
+var state; // [theta, omega]: state vector in generalized coordinate system
 
 
 function setup()
@@ -43,7 +39,6 @@ function draw()
     {
         state = runge_kutta(state, F, dT);
     }
-    //console.log(state[0], state[1]);
 
     p.x = l*sin(state[0]);
     p.y = l*cos(state[0]);
@@ -92,19 +87,4 @@ function F(x, dt)
     var accel = (-g*sin(theta)) / l;
 
     return [omega, accel];
-}
-
-
-function time_evaluate()
-{
-    var sin_th = sin(th);
-    var cos_th = cos(th);
-
-    var acc = (-g*sin_th) / l;
-
-    // update position and velocity
-    th += (oo+poo)*dT/2;
-    poo = oo;
-    oo += (acc+pacc)*dT/2;
-    pacc = acc;
 }
