@@ -55,6 +55,8 @@ function draw()
     fill(0, 0, 0);
     line(p0.x, p0.y, p.x, p.y);
     ellipse(p.x, p.y, 30);
+    stroke(0, 128, 128);
+    line(p.x, p.y, p.x+g.x/ppm/ppm*10, p.y+g.y/ppm/ppm*10);
 }
 
 
