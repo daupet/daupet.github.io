@@ -58,7 +58,8 @@ function draw()
     // drawing
     clear();
     noStroke();
-    text("gx: " + g.x/ppm + "\n" + "gy: " + g.y/ppm, 10, 10);
+    textSize(24);
+    text("accel X: " + g.x/ppm + "\n" + "accel Y: " + g.y/ppm, 10, 30);
     stroke(0, 0, 0);
     fill(0, 0, 0);
     line(p0.x, p0.y, p.x, p.y);
