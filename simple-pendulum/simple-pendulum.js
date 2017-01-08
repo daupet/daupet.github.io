@@ -11,6 +11,7 @@ var th;
 var oo;
 var poo;
 var pacc;
+var state;
 
 
 function setup()
@@ -26,6 +27,7 @@ function setup()
     oo = 0.0;
     poo = 0.0;
     pacc = 0.0;
+    state = [th, oo];
     p.x = l*sin(th);
     p.y = l*cos(th);
     p.add(p0);
@@ -39,11 +41,12 @@ function draw()
 
     for (var i=0; i<N; i++)
     {
-        time_evaluate();
+        state = runge_kutta(state, F, dT);
     }
+    //console.log(state[0], state[1]);
 
-    p.x = l*sin(th);
-    p.y = l*cos(th);
+    p.x = l*sin(state[0]);
+    p.y = l*cos(state[0]);
     p.add(p0);
 
     // drawing
@@ -52,6 +55,43 @@ function draw()
     fill(0, 255, 0);
     line(p0.x, p0.y, p.x, p.y);
     ellipse(p.x, p.y, 30);
+}
+
+
+function runge_kutta(x, f, dt)
+{
+    k1 = f(x, 0);
+
+    x2 = new Array(x.length);
+    for (var i=0; i<x.length; i++) x2[i] = x[i] + k1[i]*dt/2;
+    k2 = f(x2, dt/2);
+
+    x3 = new Array(x.length);
+    for (var i=0; i<x.length; i++) x3[i] = x[i] + k2[i]*dt/2;
+    k3 = f(x3, dt/2);
+
+    x4 = new Array(x.length);
+    for (var i=0; i<x.length; i++) x4[i] = x[i] + k3[i]*dt;
+    k4 = f(x4, dt);
+
+    x_next = new Array(x.length);
+    for (var i=0; i<x.length; i++)
+    {
+        x_next[i] = x[i] + (k1[i] + 2*k2[i] + 2*k3[i] + k4[i]) * dt/6;
+    }
+
+    return x_next
+}
+
+
+function F(x, dt)
+{
+    theta = x[0];
+    omega = x[1];
+
+    var accel = (-g*sin(theta)) / l;
+
+    return [omega, accel];
 }
 
 
