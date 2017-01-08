@@ -82,10 +82,6 @@ function draw()
     fill(0, 0, 0);
     line(p0.x, p0.y, p.x, p.y);
     ellipse(p.x, p.y, 30);
-
-    //displaying acceleration as line
-    stroke(0, 128, 128);
-    line(p.x, p.y, p.x+g.x/ppm*10, p.y+g.y/ppm*10);
 }
 
 
