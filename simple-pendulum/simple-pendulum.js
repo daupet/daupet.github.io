@@ -1,9 +1,9 @@
 var canvas;
 
-var ppm = 10; // pixel per meter
+var ppm = 100; // pixel per meter
 var dT = 0.001; // sampling interval [sec]
 var g; // gravity vector [px/sec/sec]
-var l = 100; // length of pendulum
+var l = 1.0*ppm; // length of pendulum [px]
 
 var p0; // position of origin
 var p; // [x, y]: position in Cartesian coordinate system
@@ -26,8 +26,8 @@ function setup()
     p.add(p0);
     g = createVector(0, 0);
     window.addEventListener("devicemotion", function(e) {
-            g.x = -e.accelerationIncludingGravity.x;
-            g.y = e.accelerationIncludingGravity.y;
+            g.x = -e.accelerationIncludingGravity.x * ppm;
+            g.y = e.accelerationIncludingGravity.y * ppm;
         }, false);
 }
 
@@ -58,13 +58,13 @@ function draw()
     // drawing
     clear();
     noStroke();
-    text("gx: " + g.x + "\n" + "gy: " + g.y, 10, 10);
+    text("gx: " + g.x/ppm + "\n" + "gy: " + g.y/ppm, 10, 10);
     stroke(0, 0, 0);
     fill(0, 0, 0);
     line(p0.x, p0.y, p.x, p.y);
     ellipse(p.x, p.y, 30);
     stroke(0, 128, 128);
-    line(p.x, p.y, p.x+g.x/ppm/ppm*10, p.y+g.y/ppm/ppm*10);
+    line(p.x, p.y, p.x+g.x/ppm*10, p.y+g.y/ppm*10);
 }
 
 
