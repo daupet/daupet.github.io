@@ -35,6 +35,8 @@ function setup()
     p.x = l*sin(state[0]);
     p.y = l*cos(state[0]);
     p.add(p0);
+
+    // setting gravity by using acceleration sensor
     g = createVector(0, 0);
     window.addEventListener("devicemotion", function(e) {
             g.x = -e.accelerationIncludingGravity.x * ppm;
@@ -57,12 +59,6 @@ function draw()
     N = int(1/frameRate() / dT);
     if (isFinite(N) == false) N = 0;
 
-    // update gravity
-    /*
-    g.x = accelerationX*ppm*ppm;
-    g.y = accelerationY*ppm*ppm;
-    */
-
     // calculating time evolution N times
     for (var i=0; i<N; i++)
     {
@@ -74,7 +70,6 @@ function draw()
     p.y = l*cos(state[0]);
     p.add(p0);
 
-    // drawing
     clear();
 
     // displaying acceleration as text
