@@ -11,6 +11,9 @@ var m2 = 2.0; // weight of mass-2 [kg]
 var p0; // position of origin
 var p; // [x1, y1, x2, y2]: position in Cartesian coordinate system
 var state; // [theta1, theta2, omega1, omega2]: state vector in generalized coordinate system
+var trajectory; // recent trajectory of mass-2
+var L = 200;
+var idx_traj;
 var time; // time [sec]
 
 var p_grab; // position of grabbing [px]
@@ -41,6 +44,13 @@ function setup()
     p[1] = p0.y + l1*cos(state[0]);
     p[2] = p0.x + l1*sin(state[0]) + l2*sin(state[1]);
     p[3] = p0.y + l1*cos(state[0]) + l2*cos(state[1]);
+    trajectory = new Array(L);
+    for (var i=0; i<L; i+=2)
+    {
+        trajectory[i] = p[2];
+        trajectory[i+1] = p[3];
+    }
+    idx_traj = 0;
 
     // setting gravity by using acceleration sensor
     g = createVector(0, 0);
@@ -100,6 +110,18 @@ function draw()
     ellipse(p[0], p[1], 30);
     line(p[0], p[1], p[2], p[3]);
     ellipse(p[2], p[3], 30);
+
+    idx_traj = (idx_traj+2) % L;
+    trajectory[idx_traj] = p[2];
+    trajectory[idx_traj+1] = p[3];
+    colorMode(HSB, 255);
+    for (i=0; i<L-2; i+=2)
+    {
+        var j = (i+2 + idx_traj)%L;
+        stroke(j/L*255, 255, 255);
+        line(trajectory[j%L], trajectory[(j+1)%L], trajectory[(j+2)%L], trajectory[(j+3)%L]);
+    }
+    colorMode(RGB, 255);
 }
 
 
