@@ -57,6 +57,7 @@ function setup()
             g.y = e.accelerationIncludingGravity.y * ppm;
         }, false);
 
+    // initialize variables for grabbing
     p_grab = createVector(0, 0);
     is_grabbing = false;
 }
@@ -64,6 +65,7 @@ function setup()
 
 function draw()
 {
+    // calculating grabbing position if the pendulum is grabbed
     if (is_grabbing)
     {
         calculate_grab();
@@ -86,9 +88,10 @@ function draw()
     p[2] = p0.x + l1*sin(state[0]) + l2*sin(state[1]);
     p[3] = p0.y + l1*cos(state[0]) + l2*cos(state[1]);
 
+    // calculate mechanical energy
     T = ((m1+m2)*l1*l1*state[2]*state[2] + m2*l2*l2*state[3]*state[3])/2 + m2*l1*l2*state[2]*state[3]*cos(state[0]-state[1]);
     U = -(m1*(g.x*p[0]+g.y*p[1]) + m2*(g.x*p[2]+g.y*p[3]));
-    E = T+U;
+    E = T + U;
 
     clear();
 
@@ -167,6 +170,7 @@ function F(x, t)
     omega1 = x[2];
     omega2 = x[3];
 
+    // calculating effect of grabbing if the pendulum is grabbed
     var grab_acc1 = 0;
     var grab_acc2 = 0;
     if (is_grabbing)
@@ -174,6 +178,7 @@ function F(x, t)
 
     }
 
+    // calculating frequent terms
     var M = m2 / (m1+m2);
     var C1 = cos(theta1);
     var S1 = sin(theta1);
@@ -182,9 +187,11 @@ function F(x, t)
     var Cd = cos(theta1 - theta2);
     var Sd = sin(theta1 - theta2);
 
+    // calculating anglar acceleration
     var accel1 = (M*l1*omega1*omega1*Sd*Cd + M*l2*omega2*omega2*Sd - g.x*C1 + g.y*S1 + M*g.x*C2*Cd - M*g.y*S2*Cd) / (l1*(M*Cd*Cd-1));
     var accel2 = (M*l2*omega2*omega2*Sd*Cd + l1*omega1*omega1*Sd + g.x*C2 - g.y*S2 - g.x*C1*Cd + g.y*S1*Cd) / (l2*(1-M*Cd*Cd));
 
+    // calculating anglar acceleration by grabbing
     accel1 += grab_acc1;
     accel2 += grab_acc2;
 
