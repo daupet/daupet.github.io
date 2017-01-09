@@ -45,8 +45,8 @@ function setup()
     // setting gravity by using acceleration sensor
     g = createVector(0, 0);
     window.addEventListener("devicemotion", function(e) {
-            //g.x = -e.accelerationIncludingGravity.x * ppm;
-            //g.y = e.accelerationIncludingGravity.y * ppm;
+            g.x = -e.accelerationIncludingGravity.x * ppm;
+            g.y = e.accelerationIncludingGravity.y * ppm;
         }, false);
 
     p_grab = createVector(0, 0);
@@ -60,9 +60,6 @@ function draw()
     {
         calculate_grab();
     }
-
-    g.x = 0;
-    g.y = 9.8 * ppm;
 
     // the number of time evolution at this frame
     N = int(1/frameRate() / dT);
