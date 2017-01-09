@@ -81,12 +81,20 @@ function draw()
     p[2] = p0.x + l1*sin(state[0]) + l2*sin(state[1]);
     p[3] = p0.y + l1*cos(state[0]) + l2*cos(state[1]);
 
+    T = ((m1+m2)*l1*l1*state[2]*state[2] + m2*l2*l2*state[3]*state[3])/2 + m2*l1*l2*state[2]*state[3]*cos(state[0]-state[1]);
+    U = -(m1*(g.x*p[0]+g.y*p[1]) + m2*(g.x*p[2]+g.y*p[3]));
+    E = T+U;
+
     clear();
 
     // displaying acceleration as text
+    var str = "time    : " + (time).toFixed(3) + " sec\n";
+    str += "accel X: " + (g.x/ppm).toFixed(8) + " m/sec/sec\n";
+    str += "accel Y: " + (g.y/ppm).toFixed(8) + " m/sec/sec\n";
+    str += "Energy : " + (E/ppm/ppm).toFixed(3) + " J\n";
     noStroke();
     textSize(24);
-    text("time: " + time + "\n" + "accel X: " + g.x/ppm + "\n" + "accel Y: " + g.y/ppm, 10, 30);
+    text(str, 10, 30);
 
     // drawing pendulum
     stroke(0, 0, 0);
