@@ -152,11 +152,11 @@ function F(x, t)
     omega1 = x[2];
     omega2 = x[3];
 
-    var grab_th = 0;
+    var grab_acc1 = 0;
+    var grab_acc2 = 0;
     if (is_grabbing)
     {
-        var grab_th = grip * (p_grab.x*cos(theta) - p_grab.y*sin(theta));
-        grab_th -= fric*omega;
+
     }
 
     var M = m2 / (m1+m2);
@@ -169,6 +169,9 @@ function F(x, t)
 
     var accel1 = (M*l1*omega1*omega1*Sd*Cd + M*l2*omega2*omega2*Sd - g.x*C1 + g.y*S1 + M*g.x*C2*Cd - M*g.y*S2*Cd) / (l1*(M*Cd*Cd-1));
     var accel2 = (M*l2*omega2*omega2*Sd*Cd + l1*omega1*omega1*Sd + g.x*C2 - g.y*S2 - g.x*C1*Cd + g.y*S1*Cd) / (l2*(1-M*Cd*Cd));
+
+    accel1 += grab_acc1;
+    accel2 += grab_acc2;
 
     return [omega1, omega2, accel1, accel2];
 }
