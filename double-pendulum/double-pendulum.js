@@ -52,6 +52,8 @@ function setup()
 
     // setting gravity by using acceleration sensor
     g = createVector(0, 0);
+    g.x = 0.0;
+    g.y = 9.8 * ppm;
     window.addEventListener("devicemotion", function(e) {
             g.x = -e.accelerationIncludingGravity.x * ppm;
             g.y = e.accelerationIncludingGravity.y * ppm;
